@@ -1,21 +1,33 @@
-<script src="{{site.baseurl}}/assets/js/lunr.js"></script>
+---
+layout: search
+page_title: Search
+permalink: /search/
+---
 
-
-<style>
-    .lunrsearchresult .title {color: #d9230f;}
-    .lunrsearchresult .url {color: silver;}
-    .lunrsearchresult a {display: block; color: #777;}
-    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
-    .lunrsearchresult a:hover .title {text-decoration: underline;}
-</style>
-
-
-<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
-</form>
-
-<div id="lunrsearchresults">
-    <ul></ul>
+<div class="container">
+<div class="row">
+ <div class="col-12">
+   <div id="search-bar">
+     <i class="fa fa-search" aria-hidden="true"></i>
+     <input id="search-input" type="text" placeholder="Search..." />
+   </div>
+   <ul id="results-container"></ul>
+ </div>
+</div>
 </div>
 
-<script src="{{site.baseurl}}/assets/js/lunrsearchengine.js"></script>
+<!-- Script pointing to jekyll-search.js -->
+<script src="/assets/js/lunr.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+SimpleJekyllSearch({
+     searchInput: document.getElementById('search-input'),
+     resultsContainer: document.getElementById('results-container'),
+     json: '/search.json',
+     searchResultTemplate: '<li><a href="{url}" title="{desc}" target="_blank">{title}</a></li>',
+     noResultsText: 'No results found',
+     limit: 10000,
+     fuzzy: false,
+     exclude: ['Welcome']
+});
+</script>
